@@ -24,7 +24,14 @@ pub const Proxy = struct {
     address: []const u8 = "http://127.0.0.1:8080",
 };
 
-pub const Configs = .{ Laravel, Django, Proxy };
+pub const SPA = struct {
+    pub const Template = @embedFile("spa.template");
+
+    domain: []const u8 = "example.com",
+    root: []const u8 = "/path/to/spa/build",
+};
+
+pub const Configs = .{ Laravel, Django, Proxy, SPA };
 
 /// caller owns memory, free with `freeConfig`
 pub fn promptConfig(allocator: Allocator, comptime T: type) !T {
