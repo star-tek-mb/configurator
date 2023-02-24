@@ -24,7 +24,7 @@ pub const Proxy = struct {
     address: []const u8 = "http://127.0.0.1:8080",
 };
 
-const Configs = .{ Laravel, Django, Proxy };
+pub const Configs = .{ Laravel, Django, Proxy };
 
 /// caller owns memory, free with `freeConfig`
 pub fn promptConfig(allocator: Allocator, comptime T: type) !T {
@@ -82,7 +82,7 @@ pub fn main() !void {
     var read_buf: [10]u8 = undefined;
     var read_str = try std.io.getStdIn().reader().readUntilDelimiter(&read_buf, '\n');
     var read_int = try std.fmt.parseInt(u32, read_str, 10);
-    if (read_int <= 0 or read_int >= Configs.len) {
+    if (read_int <= 0 or read_int > Configs.len) {
         try std.io.getStdOut().writer().print("Invalid config\n", .{});
         return;
     }

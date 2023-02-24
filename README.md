@@ -42,3 +42,9 @@ var1 = {{var1}}
 var2 = {{var2}}
 var3 = {{var3}}
 ```
+
+Don't forget to include your `NewConfig` to list of `Configs` in `main.zig`:
+
+```
+pub const Configs = .{ NewConfig, Laravel, Django, Proxy };
+```
