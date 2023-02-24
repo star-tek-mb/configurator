@@ -1,0 +1,23 @@
+server {
+    server_name {{domain}};
+
+    gzip on;
+    gzip_types text/css application/javascript application/json;
+    charset utf-8;
+    client_max_body_size 100M;
+
+    access_log /var/log/{{domain}}.access.log;
+    error_log /var/log/{{domain}}.error.log;
+
+    location / {
+        include proxy_params;
+        proxy_pass {{address}};
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
